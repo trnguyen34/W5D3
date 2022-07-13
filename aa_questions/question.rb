@@ -12,7 +12,8 @@ class Question
             WHERE 
             questions.id = ?
         SQL
-        data.map { |datum| Question.new(datum) }
+        #data.map { |datum| Question.new(datum) }
+        Question.new(data.first)
     end
 
     attr_accessor :title, :body, :user_id
@@ -36,3 +37,4 @@ class Question
         data.map { |datum| Question.new(datum) }
     end
 end
+
