@@ -71,8 +71,8 @@ VALUES
 INSERT INTO
     replies (question_id, parent_id, user_id, body)
 VALUES 
-    (1, NULL, 1, '80 points'),
-    (2, NULL, 2, 'It''s foreign');
+    ((SELECT id FROM questions WHERE body = 'How many points do we need'), NULL, (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen'), '80 points'),
+    ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), NULL, (SELECT id FROM users WHERE fname = 'Ari' AND lname = 'Moshe'), 'It''s foreign');
 
 INSERT INTO
     question_likes (question_id, user_id)
