@@ -12,8 +12,7 @@ class Question
             WHERE 
             questions.id = ?
         SQL
-        p data
-        Question.new(data.first)
+        data.map { |datum| Question.new(datum) }
     end
 
     attr_accessor :title, :body, :user_id
@@ -23,5 +22,17 @@ class Question
         @title = options["title"]
         @body = options["body"]
         @user_id = options["user_id"]
+    end
+
+    def self.find_by_author_id(author_id)
+        data = QuestionsDatabase.instance.execute(<<-SQL, author_id)
+            SELECT
+            *
+            FROM
+            questions
+            WHERE
+            questions.user_id = ?
+        SQL
+        data.map { |datum| Question.new(datum) }
     end
 end
