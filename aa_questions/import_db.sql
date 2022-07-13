@@ -54,25 +54,33 @@ INSERT INTO
     users (fname, lname)
 VALUES
     ('Truong', 'Nguyen'),
-    ('Ari', 'Moshe');
+    ('Ari', 'Moshe'),
+    ('John', 'Jackson');
 
 INSERT INTO 
     questions(title, body, user_id)
 VALUES
     ('Test questions', 'How many points do we need', (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen')),
+    ('Urinary needs', 'Where is the bathroom?', (SELECT id FROM users WHERE fname = 'John' AND lname = 'Jackson')),
     ('SQL', 'What is a FOREIGN KEY?', (SELECT id FROM users WHERE fname = 'Ari' AND lname = 'Moshe'));
+    
 
 INSERT INTO
     question_follows (question_id, user_id)
 VALUES
     ((SELECT id FROM questions WHERE body = 'How many points do we need'), (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen')),
-    ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), (SELECT id FROM users WHERE fname = 'Ari' AND lname = 'Moshe'));
+    ((SELECT id FROM questions WHERE body = 'Where is the bathroom?'), (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen')),
+    ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen')),
+    ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), (SELECT id FROM users WHERE fname = 'Ari' AND lname = 'Moshe')),
+    ((SELECT id FROM questions WHERE body = 'How many points do we need'), (SELECT id FROM users WHERE fname = 'Ari' AND lname = 'Moshe')),
+    ((SELECT id FROM questions WHERE body = 'How many points do we need'), (SELECT id FROM users WHERE fname = 'John' AND lname = 'Jackson'));
 
 INSERT INTO
     replies (question_id, parent_id, user_id, body)
 VALUES 
     ((SELECT id FROM questions WHERE body = 'How many points do we need'), NULL, (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen'), '80 points'),
     ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), NULL, (SELECT id FROM users WHERE fname = 'Ari' AND lname = 'Moshe'), 'It''s foreign'),
+     ((SELECT id FROM questions WHERE body = 'How many points do we need'), 1, (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen'), 'I like turtles'),
      ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), 1, (SELECT id FROM users WHERE fname = 'Ari' AND lname = 'Moshe'), 'No i think it''s 50'),
      ((SELECT id FROM questions WHERE body = 'How many points do we need'), 2, (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen'), 'That makes no sense'),
       ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), 3, (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen'), 'No way it''s 50, it has to be 80'),
