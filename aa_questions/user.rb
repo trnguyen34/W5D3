@@ -1,7 +1,7 @@
 require_relative "questionDB.rb"
 require_relative "question.rb"
 require_relative "reply.rb"
-require "byebug"
+# require "byebug"
 
 class User
 
