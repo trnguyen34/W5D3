@@ -72,5 +72,25 @@ class QuestionLike
         @user_id = options["user_id"]
     end
 
+    def self.most_liked_questions(n)
+        data = QuestionsDatabase.instance.execute(<<-SQL, n)
+            SELECT
+            *
+            FROM 
+            questions
+            JOIN
+            question_likes
+            ON
+            questions.id = question_likes.question_id
+            GROUP BY question_id
+            ORDER BY count(*) desc 
+            LIMIT ?
+        SQL
+        if data.length == 1
+            Question.new(data.first)
+        else
+            data.map{ |datum| Question.new(datum) }
+        end
+    end
 
 end

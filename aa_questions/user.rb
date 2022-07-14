@@ -1,6 +1,7 @@
 require_relative "questionDB.rb"
 require_relative "question.rb"
 require_relative "question_follow.rb"
+require_relative "question_like.rb"
 require_relative "reply.rb"
 # require "byebug"
 
@@ -36,5 +37,15 @@ class User
 
     def followed_questions
         QuestionFollow.followed_questions_for_user_id(self.id)
+    end
+
+    def liked_questions
+        QuestionLike.liked_questions_for_user_id(self.id)
+    end
+
+    def average_karma
+        data = QuestionsDatabase.instance.execute(<<-SQL, self.id)
+            SELECT 
+        SQL
     end
 end
