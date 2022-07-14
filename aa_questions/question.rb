@@ -66,5 +66,9 @@ class Question
         QuestionFollow.followers_for_question_id(self.id)
     end
 
+    # def likers
+    #     QuestionLike.
+    # end
+
 end
 

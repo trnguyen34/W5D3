@@ -90,4 +90,5 @@ INSERT INTO
     question_likes (question_id, user_id)
 VALUES
     ((SELECT id FROM questions WHERE body = 'How many points do we need'), (SELECT id FROM users WHERE fname = 'Ari' AND lname = 'Moshe')),
-    ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen'));
+    ((SELECT id FROM questions WHERE body = 'What is a FOREIGN KEY?'), (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen')),
+    ((SELECT id FROM questions WHERE body = 'Where is the bathroom?'), (SELECT id FROM users WHERE fname = 'Truong' AND lname = 'Nguyen'));
